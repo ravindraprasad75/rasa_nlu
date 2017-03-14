@@ -26,13 +26,16 @@ install:
   - source activate test-environment
   - pip install -r requirements.txt
   - python setup.py install
+  # Install sphinx requirements to test doctests
+  - sudo apt-get install python-sphinx
+  - pip install sphinx_rtd_theme
+  # Download required files
   - python -m spacy.en.download all > jnk
   - python -m spacy.de.download all > jnk
   - wget -P data/ https://s3-eu-west-1.amazonaws.com/mitie/total_word_feature_extractor.dat
 script:
   - py.test --pep8 --boxed -n0
-  - cd docs
-  - make doctest
+  - cd docs && make doctest
 deploy:
   provider: pypi
   user: "amn41"
