@@ -31,6 +31,7 @@ import sphinx_rtd_theme
 # ones.
 extensions = [
     'sphinx.ext.mathjax',
+    'sphinx.ext.doctest'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -290,3 +291,11 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+doctest_path = [os.path.abspath('../src/')]
+
+# Make sure we are using the project root as the working directory instead of /docs
+doctest_global_setup = r'''
+import os
+os.chdir(os.path.abspath('..'))
+'''
